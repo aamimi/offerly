@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-3xl font-bold;
+    }
+
+    h2 {
+        @apply text-xl font-bold;
+    }
+
+    a {
+        @apply text-blue-700 hover:text-blue-800 transition-colors;
+    }
+}
+
+@layer components {
+    .input-base {
+        @apply block w-full px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none;
+    }
+
+    .label-base {
+        @apply block text-sm font-medium text-gray-600;
+    }
+
+    .btn-base {
+        @apply py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-300 transition-colors;
+    }
+
+    .btn-primary {
+        @apply bg-blue-700 text-white hover:bg-blue-800;
+    }
+
+    .btn-outline {
+        @apply bg-transparent text-blue-700 border border-blue-700 hover:bg-blue-50;
+    }
+
+    .btn-disabled {
+        @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+    }
+
+    .btn-icon {
+        @apply flex items-center gap-2;
+    }
+
+    .btn-link {
+        @apply text-blue-700 hover:text-blue-800;
+    }
+
+    .badge {
+        @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700;
+    }
+
+    .footer {
+        @apply bg-zinc-800 text-white shadow-2xl transition-transform duration-300;
+    }
+
+    .footer-actions {
+        @apply fixed bottom-0 left-0 right-0 bg-white border-t shadow-2xl transition-transform duration-300;
+    }
+}
