@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {CircleChevronRight} from 'lucide-react';
+import RatingStars from "../RatingStars.tsx";
 
 interface Product {
     id: string;
@@ -43,9 +44,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                         </div>
                         <div className="mb-4 flex items-center justify-between">
                             <div>
-                                <span className="badge">
-                                Rating: {product.rating}/5
-                            </span>
+                                <RatingStars rating={product.rating} />
                             </div>
                             <div>
                                 <Link

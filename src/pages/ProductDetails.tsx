@@ -3,6 +3,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {fetchProductById} from '../api/products';
 import {ArrowLeftCircle} from 'lucide-react';
 import ProductImageGallery from "../components/Product/ProductImageGallery.tsx";
+import RatingStars from "../components/RatingStars.tsx";
 
 const ProductDetails = () => {
     const {id} = useParams();
@@ -47,10 +48,7 @@ const ProductDetails = () => {
                             </span>
                         </div>
                         <div className="mb-4">
-                            <span
-                                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                                Rating: {product.rating}/5
-                            </span>
+                            <RatingStars rating={product.rating} />
                         </div>
                     </div>
                 </div>
