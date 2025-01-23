@@ -43,9 +43,6 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                         </div>
                         <div className="mb-4 flex items-center justify-between">
                             <div>
-                                <span className="badge mr-2">
-                                Category: {product.category}
-                            </span>
                                 <span className="badge">
                                 Rating: {product.rating}/5
                             </span>
