@@ -59,7 +59,7 @@ const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
                 <img
                     src={images[currentImageIndex].src}
                     alt={images[currentImageIndex].alt}
-                    className="w-full h-auto object-contain"
+                    className="w-80 h-80 object-contain mx-auto"
                 />
 
                 {/* Navigation Buttons */}

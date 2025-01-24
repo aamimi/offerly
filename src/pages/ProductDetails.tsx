@@ -3,7 +3,8 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {fetchProductById} from '../api/products';
 import {ArrowLeftCircle} from 'lucide-react';
 import ProductImageGallery from "../components/Product/ProductImageGallery.tsx";
-import RatingStars from "../components/RatingStars.tsx";
+import RatingStars from "../components/Global/RatingStars.tsx";
+import ProductReviews from "../components/Product/ProductReviews.tsx";
 
 const ProductDetails = () => {
     const {id} = useParams();
@@ -33,14 +34,14 @@ const ProductDetails = () => {
                 Back to Products
             </button>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-3">
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8 mb-3">
                 <div className="md:flex">
                     <div className="md:flex-shrink-0">
                         <div className="md:flex-shrink-0">
                             <ProductImageGallery images={images}/>
                         </div>
                     </div>
-                    <div className="p-8">
+                    <div>
                         <h1 className="mb-2">{product.title}</h1>
                         <div className="mb-4">
                             <span className="text-2xl font-bold text-gray-900">
@@ -53,7 +54,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8">
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8 mb-3">
                 <div className="pb-4 border-b-2">
                     <h2 className="mb-2">About</h2>
                     <p className="mb-2">{product.description}</p>
@@ -74,6 +75,10 @@ const ProductDetails = () => {
                     <p>Il suffit de vous rendre sur le site de notre partenaire et d'entrer le code promo suivant
                         : <strong>DEAL10</strong></p>
                 </div>
+            </div>
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8">
+                <h2 className="mb-4 text-xl font-semibold">Customer Reviews</h2>
+                <ProductReviews productId={product.id} />
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {CircleChevronRight} from 'lucide-react';
-import RatingStars from "../RatingStars.tsx";
+import RatingStars from "../Global/RatingStars.tsx";
 
 interface Product {
     id: string;
@@ -22,7 +22,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
         <article className="border rounded-lg bg-white p-4" aria-labelledby={`product-title-${product.id}`}>
             <div className="flex">
                 <img
-                    className="w-48 h-48 object-cover mr-4 bg-gray-200 rounded-lg"
+                    className="sm:w-48 sm:h-48 w-24 h-24 object-cover mr-4 bg-gray-200 rounded-lg"
                     src={product.thumbnail || 'https://via.placeholder.com/150'}
                     alt={product.title}
                 />
@@ -37,13 +37,13 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                             </Link>
                         </h2>
                         <p className="text-gray-700 mb-2 line-clamp-2">{product.description}</p>
-                        <div className="mb-3">
+                        <div className="mb-2">
                           <span className="text-xl font-semibold">
                             ${product.price}
                           </span>
                         </div>
-                        <div className="mb-4 flex items-center justify-between">
-                            <div>
+                        <div className="mb-2 sm:flex items-center justify-between">
+                            <div className="sm:mb-0 mb-4">
                                 <RatingStars rating={product.rating} />
                             </div>
                             <div>
