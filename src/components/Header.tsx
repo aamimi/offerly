@@ -19,12 +19,6 @@ const Header = () => {
                         <Link to="/categories" className="text-zinc-300 hover:text-zinc-100">
                             Categories
                         </Link>
-                        <Link to="/deals" className="text-zinc-300 hover:text-zinc-100">
-                            Deals
-                        </Link>
-                        <Link to="/new" className="text-zinc-300 hover:text-zinc-100">
-                            New Arrivals
-                        </Link>
                     </nav>
 
                     {/* Right side icons */}

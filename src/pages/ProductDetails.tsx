@@ -1,14 +1,14 @@
 import {useQuery} from '@tanstack/react-query';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {fetchProductById} from '../api/products';
-import {ArrowLeftCircle} from 'lucide-react';
+import {ArrowLeftCircle, Star} from 'lucide-react';
 import ProductImageGallery from "../components/Product/ProductImageGallery.tsx";
 import RatingStars from "../components/Global/RatingStars.tsx";
 import ProductReviews from "../components/Product/ProductReviews.tsx";
 
+
 const ProductDetails = () => {
     const {id} = useParams();
-    const navigate = useNavigate();
 
     const {data: product, isLoading, isError, error} = useQuery({
         queryKey: ['product', id],
@@ -25,36 +25,33 @@ const ProductDetails = () => {
     }));
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <button
-                onClick={() => navigate(-1)}
-                className="mb-6 btn-icon btn-link"
-            >
+        <div className="container mx-auto">
+            <Link
+                to="/"
+                className="btn-base btn-link btn-icon mb-4">
                 <ArrowLeftCircle size={20}/>
                 Back to Products
-            </button>
+            </Link>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8 mb-3">
-                <div className="md:flex">
-                    <div className="md:flex-shrink-0">
-                        <div className="md:flex-shrink-0">
-                            <ProductImageGallery images={images}/>
-                        </div>
+            <div className="bg-white rounded-lg shadow-sm p-8 mb-4">
+                <div className="xl:flex">
+                    <div className="md:flex-shrink-0 mb-4 lg:mb-0">
+                        <ProductImageGallery images={images}/>
                     </div>
                     <div>
                         <h1 className="mb-2">{product.title}</h1>
                         <div className="mb-4">
-                            <span className="text-2xl font-bold text-gray-900">
+                            <span className="text-2xl font-semibold">
                                 ${product.price}
                             </span>
                         </div>
                         <div className="mb-4">
-                            <RatingStars rating={product.rating} />
+                            <RatingStars rating={product.rating}/>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8 mb-3">
+            <div className="bg-white rounded-lg shadow-sm p-8 mb-4">
                 <div className="pb-4 border-b-2">
                     <h2 className="mb-2">About</h2>
                     <p className="mb-2">{product.description}</p>
@@ -76,9 +73,18 @@ const ProductDetails = () => {
                         : <strong>DEAL10</strong></p>
                 </div>
             </div>
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden p-8">
-                <h2 className="mb-4 text-xl font-semibold">Customer Reviews</h2>
-                <ProductReviews productId={product.id} />
+            <div className="bg-white rounded-lg shadow-sm p-8">
+                <div className="flex items-center justify-between mb-4">
+                    <h2>Customer Reviews</h2>
+                    <Link
+                        to={`/products/${product.id}/create-review`}
+                        className="btn-base btn-primary btn-icon"
+                    >
+                        <Star size={20}/>
+                        Write a Review
+                    </Link>
+                </div>
+                <ProductReviews productId={product.id}/>
             </div>
         </div>
     );

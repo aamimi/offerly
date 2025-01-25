@@ -24,7 +24,11 @@
     }
 
     label {
-        @apply block text-sm font-medium;
+        @apply block text-sm/6 font-medium mb-2;
+    }
+
+    textarea {
+        @apply block w-full rounded-md p-3 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6;
     }
 }
 
