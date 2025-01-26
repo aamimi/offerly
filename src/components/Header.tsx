@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Search, User } from 'lucide-react';
+import {ModeToggle} from "@/components/ModeToggle.tsx";
 
 const Header = () => {
     return (
@@ -33,6 +34,7 @@ const Header = () => {
                             className="p-2 hover:text-zinc-100 hover:bg-zinc-700 rounded-full">
                             <User size={20} />
                         </button>
+                        <ModeToggle />
                     </div>
                 </div>
             </div>
