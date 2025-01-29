@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import RatingStars from "../Global/RatingStars.tsx";
+import RatingStars from "@ui/elements/RatingStars.tsx";
 import { fetchProductReviews } from '@api/reviews';
-import Pagination from '../Global/Pagination';
-import ExpandedText from '../Global/ExpandedText';
+import Pagination from '@ui/elements/Pagination';
+import ExpandedText from '@ui/elements/ExpandedText';
 
 interface Review {
     id: string;

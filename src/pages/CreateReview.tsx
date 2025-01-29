@@ -4,12 +4,12 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {useMutation} from '@tanstack/react-query';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {createProductReview} from '../api/reviews';
-import RatingSelector from '@components/Global/RatingSelector';
+import {createProductReview} from '@api/reviews';
+import RatingSelector from '@ui/elements/RatingSelector';
 import {Button} from '@ui/button';
 import {Textarea} from '@ui/textarea';
 import {Label} from '@ui/label';
-import {AlertDestructive} from "@ui/AlertDestructive";
+import {AlertDestructive} from "@ui/elements/AlertDestructive";
 import ReviewProduct from '@components/Product/ReviewProduct';
 
 type FormValues = {

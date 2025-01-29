@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {CircleChevronRight} from 'lucide-react';
-import RatingStars from "../Global/RatingStars.tsx";
+import RatingStars from "@ui/elements/RatingStars.tsx";
 
 interface Product {
     id: string;

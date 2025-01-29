@@ -1,7 +1,7 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
-import {fetchProducts} from '../api/products';
+import {fetchProducts} from '@api/products';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import ProductListCard from "../components/Product/ProductListCard.tsx";
+import ProductListCard from "@components/Product/ProductListCard.tsx";
 import {Helmet} from 'react-helmet';
 
 const PRODUCTS_PER_PAGE = 10;

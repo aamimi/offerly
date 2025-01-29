@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Search, User } from 'lucide-react';
-import {ModeToggle} from "@/components/ModeToggle.tsx";
+import {ModeToggle} from "@ui/elements/ModeToggle.tsx";
 
 const Header = () => {
     return (

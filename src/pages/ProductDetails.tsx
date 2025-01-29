@@ -1,11 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
 import {Link, useParams} from 'react-router-dom';
-import {fetchProductById} from '../api/products';
+import {fetchProductById} from '@api/products';
 import {ArrowLeftCircle, Star} from 'lucide-react';
-import ProductImageGallery from "../components/Product/ProductImageGallery.tsx";
-import RatingStars from "../components/Global/RatingStars.tsx";
-import ProductReviews from "../components/Product/ProductReviews.tsx";
-
+import ProductImageGallery from "@components/Product/ProductImageGallery.tsx";
+import RatingStars from "@ui/elements/RatingStars.tsx";
+import ProductReviews from "@components/Product/ProductReviews.tsx";
 
 const ProductDetails = () => {
     const {id} = useParams();
