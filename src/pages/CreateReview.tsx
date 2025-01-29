@@ -11,6 +11,7 @@ import {Textarea} from '@ui/textarea';
 import {Label} from '@ui/label';
 import {AlertDestructive} from "@ui/elements/AlertDestructive";
 import ReviewProduct from '@components/Product/ReviewProduct';
+import {Helmet} from "react-helmet";
 
 type FormValues = {
     rating: number
@@ -55,59 +56,62 @@ const CreateReview = () => {
     };
 
     return (
-        <div className="container mx-auto">
-            <div className="card">
-                <h1 className="mb-4">Create Review</h1>
-                {id && <ReviewProduct productId={id} />}
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="border-b pb-12 mb-4">
-                        <div className="mb-4">
-                            <Label htmlFor="rating">Rating</Label>
-                            <RatingSelector
-                                onRatingChange={(value: number): void => setValue('rating', value)}
-                                ariaInvalid={!!errors.rating}/>
-                            {
-                                errors.rating &&
-                                <div className="text-red-500 mb-2" role="alert">{errors.rating.message}</div>
-                            }
-                            <p className="text-sm text-muted-foreground">Choose a rating from 1 to 5</p>
+        <>
+            <Helmet>
+                <title>Create review for a product</title>
+                <meta name="description"
+                      content="Write a few sentences about the product and your experience with it."/>
+            </Helmet>
+            <div className="container mx-auto">
+                <div className="card">
+                    <h1 className="mb-4">Create Review</h1>
+                    {id && <ReviewProduct productId={id}/>}
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="border-b pb-12 mb-4">
+                            <div className="mb-4">
+                                <Label htmlFor="rating" className="text-lg mb-2">Overall rating</Label>
+                                <RatingSelector
+                                    onRatingChange={(value: number): void => setValue('rating', value)}
+                                    ariaInvalid={!!errors.rating}/>
+                                {
+                                    errors.rating &&
+                                    <div className="text-red-500 my-2" role="alert">{errors.rating.message}</div>
+                                }
+                            </div>
+                            <div className="mb-4">
+                                <Label htmlFor="review" className="text-lg mb-2">Add a written review</Label>
+                                <Textarea
+                                    {...register('review')}
+                                    id="review"
+                                    rows={3}
+                                    placeholder="What did you like or dislike about the product?"
+                                    aria-invalid={errors.review ? "true" : "false"}
+                                />
+                                {
+                                    errors.review &&
+                                    <div className="text-red-500 my-2" role="alert">{errors.review.message}</div>
+                                }
+                            </div>
                         </div>
-                        <div className="mb-4">
-                            <Label htmlFor="review">Review</Label>
-                            <Textarea
-                                {...register('review')}
-                                id="review"
-                                rows={3}
-                                placeholder="What did you like or dislike about the product?"
-                                aria-invalid={errors.review ? "true" : "false"}
-                            />
-                            {
-                                errors.review &&
-                                <div className="text-red-500 mb-2" role="alert">{errors.review.message}</div>
-                            }
-                            <p className="text-sm text-muted-foreground">
-                                Write a few sentences about the product and your experience with it.
-                            </p>
+                        {serverError && <AlertDestructive message={serverError}/>}
+                        <div className="mt-6 flex items-center justify-end gap-x-4">
+                            <Button asChild variant="link">
+                                <Link
+                                    to={`/products/${id}`}
+                                    aria-label="Cancel creation of a review">
+                                    Cancel
+                                </Link>
+                            </Button>
+                            <Button
+                                type="submit"
+                                aria-label="Submit the form">
+                                Submit
+                            </Button>
                         </div>
-                    </div>
-                    {serverError && <AlertDestructive message={serverError}/>}
-                    <div className="mt-6 flex items-center justify-end gap-x-4">
-                        <Button asChild variant="link">
-                            <Link
-                                to={`/products/${id}`}
-                                aria-label="Cancel creation of a review">
-                                Cancel
-                            </Link>
-                        </Button>
-                        <Button
-                            type="submit"
-                            aria-label="Submit the form">
-                            Submit
-                        </Button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -20,10 +20,12 @@ interface ProductListCardProps {
 
 const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
     return (
-        <article className="border rounded-lg bg-white p-4" aria-labelledby={`product-title-${product.id}`}>
+        <article
+            className="card p-6"
+            aria-labelledby={`product-title-${product.id}`}>
             <div className="flex">
                 <img
-                    className="sm:w-48 sm:h-48 w-24 h-24 object-cover mr-4 bg-gray-200 rounded-lg"
+                    className="sm:w-48 sm:h-48 w-24 h-24 object-cover mr-4 bg-gray-200 rounded-sm"
                     src={product.thumbnail || 'https://via.placeholder.com/150'}
                     alt={product.title}
                 />
@@ -32,14 +34,14 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                         <h2 id={`product-title-${product.id}`} className="mb-2">
                             <Link
                                 to={`/products/${product.id}`}
-                                className="text-gray-900"
+                                className="text-zinc-900 dark:text-zinc-300"
                             >
                                 {product.title}
                             </Link>
                         </h2>
-                        <p className="text-gray-700 mb-2 line-clamp-2">{product.description}</p>
+                        <p className="text-zinc-700 dark:text-zinc-400 mb-2 line-clamp-2">{product.description}</p>
                         <div className="mb-2">
-                          <span className="text-xl font-semibold">
+                          <span className="text-xl text-zinc-900 dark:text-zinc-300 font-semibold">
                             ${product.price}
                           </span>
                         </div>
@@ -48,7 +50,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                                 <RatingStars rating={product.rating} />
                             </div>
                             <div>
-                                <Button asChild variant={'outline'}>
+                                <Button asChild variant='default'>
                                     <Link
                                         to={`/products/${product.id}`}
                                         aria-label={`See more details about ${product.title}`}>
