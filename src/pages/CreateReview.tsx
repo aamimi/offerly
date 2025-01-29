@@ -1,17 +1,16 @@
 import {useState} from "react";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {SubmitHandler, useForm} from 'react-hook-form';
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useMutation} from '@tanstack/react-query';
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {fetchProductById} from '../api/products';
 import {createProductReview} from '../api/reviews';
 import RatingSelector from '@components/Global/RatingSelector';
 import {Button} from '@ui/button';
 import {Textarea} from '@ui/textarea';
 import {Label} from '@ui/label';
-import { Alert, AlertDescription, AlertTitle } from "@ui/alert";
-import { AlertCircle } from "lucide-react";
+import {AlertDestructive} from "@ui/AlertDestructive";
+import ReviewProduct from '@components/Product/ReviewProduct';
 
 type FormValues = {
     rating: number
@@ -22,10 +21,6 @@ const CreateReview = () => {
     const [serverError, setServerError] = useState<string>('');
     const {id} = useParams();
     const navigate = useNavigate();
-    const {data: product, isLoading, isError, error} = useQuery({
-        queryKey: ['product', id],
-        queryFn: () => fetchProductById(id || ''),
-    });
 
     const mutation = useMutation({
         mutationFn: (newReview: FormValues) => createProductReview(id || '', newReview),
@@ -59,26 +54,18 @@ const CreateReview = () => {
         mutation.mutate(values);
     };
 
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error: {error.message}</div>;
-
     return (
         <div className="container mx-auto">
             <div className="card">
                 <h1 className="mb-4">Create Review</h1>
-                {product && (
-                    <div className="flex items-center gap-3 border-b pb-6 mb-4">
-                        <img src={product.thumbnail} alt={product.title} className="w-24 h-24 object-cover mr-3"/>
-                        <p>{product.title}</p>
-                    </div>
-                )}
+                {id && <ReviewProduct productId={id} />}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="border-b pb-12 mb-4">
                         <div className="mb-4">
                             <Label htmlFor="rating">Rating</Label>
                             <RatingSelector
-                                onRatingChange={(value: number):void => setValue('rating', value)}
-                                ariaInvalid={!!errors.rating} />
+                                onRatingChange={(value: number): void => setValue('rating', value)}
+                                ariaInvalid={!!errors.rating}/>
                             {
                                 errors.rating &&
                                 <div className="text-red-500 mb-2" role="alert">{errors.rating.message}</div>
@@ -103,16 +90,7 @@ const CreateReview = () => {
                             </p>
                         </div>
                     </div>
-                    {
-                        serverError &&
-                        <Alert variant="destructive">
-                            <AlertCircle className="h-4 w-4" />
-                            <AlertTitle>Error</AlertTitle>
-                            <AlertDescription>
-                                {serverError}
-                            </AlertDescription>
-                        </Alert>
-                    }
+                    {serverError && <AlertDestructive message={serverError}/>}
                     <div className="mt-6 flex items-center justify-end gap-x-4">
                         <Button asChild variant="link">
                             <Link to={`/products/${id}`}>

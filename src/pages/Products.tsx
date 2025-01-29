@@ -23,8 +23,10 @@ const Products = () => {
         initialPageParam: 0
     });
 
-    if (status === 'pending') return <div aria-live="polite">Loading...</div>;
-    if (status === 'error') return <div aria-live="polite">Error: {error.message}</div>;
+    if (status === 'pending')
+        return <div className="container mx-auto py-4" aria-live="polite">Loading...</div>;
+    if (status === 'error')
+        return <div className="container mx-auto py-4" aria-live="polite">Error: {error.message}</div>;
 
     const products = data?.pages.flatMap(page => page.products) ?? [];
 

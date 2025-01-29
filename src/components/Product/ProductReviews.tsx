@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import RatingStars from "../Global/RatingStars.tsx";
-import { fetchProductReviews } from '../../api/reviews';
-import Pagination from '../Global/Pagination.tsx';
-import ExpandedText from '../Global/ExpandedText.tsx';
+import { fetchProductReviews } from '@api/reviews';
+import Pagination from '../Global/Pagination';
+import ExpandedText from '../Global/ExpandedText';
 
 interface Review {
     id: string;
@@ -37,7 +37,6 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
                 setIsLoading(false);
             }
         };
-
         loadReviews();
     }, [productId, page]);
 
@@ -53,13 +52,8 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
         });
     };
 
-    if (isLoading) {
-        return <div>Loading reviews...</div>;
-    }
-
-    if (reviews.length === 0) {
-        return <div>No reviews available</div>;
-    }
+    if (isLoading) return <div className="py-4" aria-live="polite">Loading...</div>;
+    if (reviews.length === 0) return <div className="py-4" aria-live="polite">No reviews available.</div>;
 
     return (
         <div className="space-y-4">

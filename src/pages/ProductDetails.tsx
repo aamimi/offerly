@@ -15,8 +15,8 @@ const ProductDetails = () => {
         queryFn: () => fetchProductById(id || ''),
     });
 
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error: {error.message}</div>;
+    if (isLoading) return <div className="container mx-auto py-4" aria-live="polite">Loading...</div>;
+    if (isError) return <div className="container mx-auto py-4" aria-live="polite">Error: {error.message}</div>;
 
     // Ensure images have src and alt properties
     const images = product.images.map((image: string, index: number) => ({

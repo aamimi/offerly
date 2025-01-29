@@ -1,7 +1,7 @@
 import {Link, useLocation} from 'react-router-dom';
 import {ArrowDownCircle, ArrowUpCircle, XCircle} from "lucide-react";
 import {useEffect, useState} from "react";
-import {scrollTo} from "../utils/scrollUtils.ts";
+import {scrollTo} from "@lib/scrollUtils";
 
 const SCROLL_THRESHOLD = 300;
 

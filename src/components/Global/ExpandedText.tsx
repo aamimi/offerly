@@ -1,5 +1,5 @@
 import React from 'react';
-import { truncateText } from '../../utils/stringUtils';
+import { truncateText } from '@lib/stringUtils';
 
 interface ExpandedTextProps {
     text: string;
