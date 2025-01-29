@@ -93,11 +93,17 @@ const CreateReview = () => {
                     {serverError && <AlertDestructive message={serverError}/>}
                     <div className="mt-6 flex items-center justify-end gap-x-4">
                         <Button asChild variant="link">
-                            <Link to={`/products/${id}`}>
+                            <Link
+                                to={`/products/${id}`}
+                                aria-label="Cancel creation of a review">
                                 Cancel
                             </Link>
                         </Button>
-                        <Button type="submit">Submit</Button>
+                        <Button
+                            type="submit"
+                            aria-label="Submit the form">
+                            Submit
+                        </Button>
                     </div>
                 </form>
             </div>

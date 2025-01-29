@@ -3,6 +3,7 @@ import RatingStars from "@ui/elements/RatingStars.tsx";
 import { fetchProductReviews } from '@api/reviews';
 import Pagination from '@ui/elements/Pagination';
 import ExpandedText from '@ui/elements/ExpandedText';
+import {toLocaleDateString} from "@lib/dateUtils.ts";
 
 interface Review {
     id: string;
@@ -64,7 +65,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
                             <h3 className="font-semibold">{review.reviewerName}</h3>
                             <span className="text-sm text-gray-500">{review.reviewerEmail}</span>
                         </div>
-                        <span className="text-sm">{new Date(review.date).toLocaleDateString()}</span>
+                        <span className="text-sm">{toLocaleDateString(review.date)}</span>
                     </div>
                     <RatingStars rating={review.rating} />
                     <p className="mt-2">

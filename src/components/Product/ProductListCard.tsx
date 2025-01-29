@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {CircleChevronRight} from 'lucide-react';
 import RatingStars from "@ui/elements/RatingStars.tsx";
+import {Button} from "@ui/button.tsx";
 
 interface Product {
     id: string;
@@ -47,14 +48,14 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                                 <RatingStars rating={product.rating} />
                             </div>
                             <div>
-                                <Link
-                                    to={`/products/${product.id}`}
-                                    className="btn-base btn-outline btn-icon"
-                                    aria-label={`See more details about ${product.title}`}
-                                >
-                                    See more
-                                    <CircleChevronRight size={20}/>
-                                </Link>
+                                <Button asChild variant={'outline'}>
+                                    <Link
+                                        to={`/products/${product.id}`}
+                                        aria-label={`See more details about ${product.title}`}>
+                                        See more
+                                        <CircleChevronRight/>
+                                    </Link>
+                                </Button>
                             </div>
                         </div>
                     </div>

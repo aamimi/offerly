@@ -5,6 +5,7 @@ import {ArrowLeftCircle, Star} from 'lucide-react';
 import ProductImageGallery from "@components/Product/ProductImageGallery.tsx";
 import RatingStars from "@ui/elements/RatingStars.tsx";
 import ProductReviews from "@components/Product/ProductReviews.tsx";
+import {Button} from "@ui/button.tsx";
 
 const ProductDetails = () => {
     const {id} = useParams();
@@ -25,12 +26,12 @@ const ProductDetails = () => {
 
     return (
         <div className="container mx-auto">
-            <Link
-                to="/"
-                className="btn-base btn-link btn-icon mb-4">
-                <ArrowLeftCircle size={20}/>
-                Back to Products
-            </Link>
+            <Button asChild variant="link">
+                <Link to="/" aria-label="Back to Products">
+                    <ArrowLeftCircle/>
+                    Back to Products
+                </Link>
+            </Button>
 
             <div className="bg-white rounded-lg shadow-sm p-8 mb-4">
                 <div className="xl:flex">
@@ -75,13 +76,14 @@ const ProductDetails = () => {
             <div className="bg-white rounded-lg shadow-sm p-8">
                 <div className="flex items-center justify-between mb-4">
                     <h2>Customer Reviews</h2>
-                    <Link
-                        to={`/products/${product.id}/create-review`}
-                        className="btn-base btn-primary btn-icon"
-                    >
-                        <Star size={20}/>
-                        Write a Review
-                    </Link>
+                    <Button asChild>
+                        <Link
+                            to={`/products/${product.id}/create-review`}
+                            aria-label="Write a Review">
+                            <Star/>
+                            Write a Review
+                        </Link>
+                    </Button>
                 </div>
                 <ProductReviews productId={product.id}/>
             </div>

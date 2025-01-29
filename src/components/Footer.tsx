@@ -2,6 +2,7 @@ import {Link, useLocation} from 'react-router-dom';
 import {ArrowDownCircle, ArrowUpCircle, XCircle} from "lucide-react";
 import {useEffect, useState} from "react";
 import {scrollTo} from "@lib/scrollUtils";
+import {Button} from "@ui/button.tsx";
 
 const SCROLL_THRESHOLD = 300;
 
@@ -67,23 +68,20 @@ const Footer = () => {
             </footer>
             <div className={`footer-actions ${showFooterActions && withInfiniteScroll ? 'translate-y-0' : 'translate-y-full'}`}>
                 <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-                    <button
+                    <Button
+                        variant={'link'}
                         onClick={() => scrollTo(0)}
-                        className="btn-base btn-link btn-icon"
-                        aria-label="Scroll to top"
-                    >
-                        <ArrowUpCircle size={20}/>
+                        aria-label="Scroll to top">
+                        <ArrowUpCircle/>
                         Back to Top
-                    </button>
-
-                    <button
+                    </Button>
+                    <Button
+                        variant={'link'}
                         onClick={() => setShowFooter(!showFooter)}
-                        className="btn-base btn-link btn-icon"
-                        aria-label="Show footer"
-                    >
-                        {showFooter ? <XCircle size={20}/> : <ArrowDownCircle size={20}/>}
+                        aria-label="Show footer">
+                        {showFooter ? <XCircle/> : <ArrowDownCircle/>}
                         {showFooter ? 'Hide' : 'Show'} Footer
-                    </button>
+                    </Button>
                 </div>
             </div>
         </>
