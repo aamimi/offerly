@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
+import {Button} from "@ui/button.tsx";
 
 interface Image {
     src: string;
@@ -45,8 +46,8 @@ const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
                                 alt={img.alt}
                                 className={`w-16 h-16 object-cover cursor-pointer border-2 ${
                                     index === currentImageIndex
-                                        ? 'border-blue-500'
-                                        : 'border-transparent hover:border-gray-300'
+                                        ? 'border-zinc-400'
+                                        : 'border-transparent hover:border-zinc-200'
                                 }`}
                             />
                         </button>
@@ -65,18 +66,22 @@ const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
                 {/* Navigation Buttons */}
                 {images.length > 1 && (
                     <>
-                        <button
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            className="absolute left-2 top-1/2 -translate-y-1/2"
                             onClick={handlePrevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white/75"
-                        >
-                            <ChevronLeft className="w-6 h-6"/>
-                        </button>
-                        <button
+                            aria-label='Previous Image'>
+                            <ChevronLeft/>
+                        </Button>
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            className="absolute right-2 top-1/2 -translate-y-1/2"
                             onClick={handleNextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/50 rounded-full p-2 hover:bg-white/75"
-                        >
-                            <ChevronRight className="w-6 h-6"/>
-                        </button>
+                            aria-label='Previous Image'>
+                            <ChevronRight/>
+                        </Button>
                     </>
                 )}
             </div>
