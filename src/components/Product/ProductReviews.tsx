@@ -38,7 +38,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
                 setIsLoading(false);
             }
         };
-        loadReviews();
+        loadReviews().catch(error => console.error('Failed to load reviews:', error));
     }, [productId, page]);
 
     const toggleReadMore = (id: string) => {

@@ -19,7 +19,7 @@ const RatingSelector: React.FC<RatingSelectorProps> = ({initialRating = 0, onRat
     };
 
     return (
-        <div className="flex" aria-invalid={ariaInvalid}>
+        <div className="flex" aria-invalid={ariaInvalid} id="rating">
             {[1, 2, 3, 4, 5].map((star) => (
                 <Star
                     key={star}
