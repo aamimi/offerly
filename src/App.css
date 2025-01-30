@@ -22,49 +22,13 @@
     textarea {
         @apply block w-full rounded-md p-3 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6;
     }
-  :root {
-        --radius: 0.5rem
+
+    :root {
+        --radius: 0.5rem;
     }
 }
 
 @layer components {
-    .input-base {
-        @apply block w-full px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md focus:ring focus:ring-blue-200 focus:outline-none;
-    }
-
-    .label-base {
-        @apply block text-sm font-medium text-gray-600;
-    }
-
-    .btn-base {
-        @apply py-2 px-4 rounded-full focus:outline-none focus:ring focus:ring-blue-300 transition-transform duration-300 transform hover:translate-x-1;
-    }
-
-    .btn-primary,
-    a.btn-primary {
-        @apply bg-blue-700 text-white hover:bg-blue-900;
-    }
-
-    .btn-outline {
-        @apply bg-transparent text-blue-700 border border-blue-700 hover:bg-blue-50;
-    }
-
-    .btn-disabled {
-        @apply bg-gray-300 text-gray-500 cursor-not-allowed;
-    }
-
-    .btn-icon {
-        @apply flex items-center justify-center gap-2 w-fit;
-    }
-
-    .btn-link {
-        @apply text-blue-700 hover:text-blue-900;
-    }
-
-    .badge {
-        @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700;
-    }
-
     .footer {
         @apply bg-zinc-800 text-white border-t border-zinc-200 dark:border-zinc-700 transition-transform duration-300;
     }
