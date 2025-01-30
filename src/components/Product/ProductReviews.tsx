@@ -59,7 +59,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
     return (
         <div className="space-y-4">
             {reviews.map((review) => (
-                <div key={review.id} className="border p-4 rounded-lg bg-gray-50">
+                <div key={review.id} className="card p-6 rounded-sm">
                     <div className="flex justify-between items-center mb-2">
                         <div>
                             <h3 className="font-semibold">{review.reviewerName}</h3>

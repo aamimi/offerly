@@ -7,12 +7,14 @@ interface ExpandedTextProps {
     toggleExpand: () => void;
 }
 
+const maxLength = 500;
+
 const ExpandedText: React.FC<ExpandedTextProps> = ({ text, isExpanded, toggleExpand }) => {
     return (
         <>
-            {isExpanded ? text : truncateText(text, 400)}
-            {text.length > 400 && (
-                <button onClick={toggleExpand} className="text-blue-500 ml-2">
+            {isExpanded ? text : truncateText(text, maxLength)}
+            {text.length > maxLength && (
+                <button onClick={toggleExpand} className="font-semibold ml-2">
                     {isExpanded ? 'Read Less' : 'Read More'}
                 </button>
             )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from "@ui/button.tsx";
 
 interface PaginationProps {
     currentPage: number;
@@ -6,7 +7,7 @@ interface PaginationProps {
     onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({currentPage, totalPages, onPageChange}) => {
     const getPageNumbers = () => {
         const pages = [];
         const maxPagesToShow = 5;
@@ -39,30 +40,30 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
 
     return (
         <div className="flex justify-center space-x-2">
-            <button
+            <Button
+                variant={'outline'}
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="btn-base btn-outline"
-            >
+                aria-label="Go to previous page">
                 Previous
-            </button>
+            </Button>
             {getPageNumbers().map((page, index) => (
-                <button
+                <Button
+                    variant={`${page === currentPage ? 'default' : 'outline'}`}
                     key={index}
                     onClick={() => typeof page === 'number' && onPageChange(page)}
                     disabled={page === currentPage || page === '...'}
-                    className={`btn-base ${page === currentPage ? 'btn-primary' : 'btn-outline'}`}
-                >
+                    aria-label={`Go to page ${page}`}>
                     {page}
-                </button>
+                </Button>
             ))}
-            <button
+            <Button
+                variant={'outline'}
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="btn-base btn-outline"
-            >
+                aria-label="Go to next page">
                 Next
-            </button>
+            </Button>
         </div>
     );
 };
