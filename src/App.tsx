@@ -3,7 +3,9 @@ import Layout from "./components/Layout";
 import Products from "./pages/Products";
 import CreateReview from "./pages/CreateReview";
 import ProductDetails from "./pages/ProductDetails";
+import Categories from "@/pages/Categories";
 import './App.css'
+
 
 
 function App() {
@@ -12,8 +14,10 @@ function App() {
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Products />} />
+                    <Route path="/products" element={<Products />} />
                     <Route path="/products/:id" element={<ProductDetails />} />
                     <Route path="/products/:id/create-review" element={<CreateReview />} />
+                    <Route path="/categories" element={<Categories />} />
                 </Route>
             </Routes>
         </BrowserRouter>
