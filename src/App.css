@@ -19,25 +19,41 @@
         @apply list-disc list-inside;
     }
 
-    textarea {
-        @apply block w-full rounded-md p-3 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6;
-    }
-
     :root {
         --radius: 0.5rem;
     }
 }
 
 @layer components {
+    .border-color {
+        @apply border-zinc-200 dark:border-zinc-700;
+    }
+
+    .bg-color {
+        @apply bg-zinc-100 dark:bg-zinc-800;
+    }
+
+    .text-color {
+        @apply text-zinc-800 dark:text-zinc-200;
+    }
+
+    .header {
+        @apply bg-color text-color border-color border-b;
+    }
+
     .footer {
-        @apply bg-zinc-800 text-white border-t border-zinc-200 dark:border-zinc-700 transition-transform duration-300;
+        @apply bg-color text-color border-color border-t transition-transform duration-300;
     }
 
     .footer-actions {
-        @apply fixed bottom-0 left-0 right-0 bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 border-t border-zinc-200 dark:border-zinc-700 transition-transform duration-300;
+        @apply fixed bottom-0 left-0 right-0 bg-color text-color border-color border-t transition-transform duration-300;
+    }
+
+    .base-card {
+        @apply bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-300 border border-color;
     }
 
     .card {
-        @apply bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 p-8;
+        @apply base-card p-4 lg:p-8;
     }
 }

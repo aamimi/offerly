@@ -6,6 +6,14 @@ import {Button} from "@ui/button.tsx";
 
 const SCROLL_THRESHOLD = 300;
 
+const getFooterClassName = (withInfiniteScroll: boolean, showFooter: boolean): string => {
+    return `footer ${withInfiniteScroll ? 'fixed bottom-0 left-0 right-0' : ''} `
+        + `${showFooter || !withInfiniteScroll ? 'translate-y-0' : 'translate-y-full'}`;
+};
+const getFooterActionsClassName = (showFooterActions: boolean, withInfiniteScroll: boolean): string => {
+    return `footer-actions ${showFooterActions && withInfiniteScroll ? 'translate-y-0' : 'translate-y-full'}`;
+};
+
 const Footer = () => {
     const [showFooterActions, setShowFooterActions] = useState(false);
     const [showFooter, setShowFooter] = useState(false);
@@ -30,7 +38,7 @@ const Footer = () => {
 
     return (
         <>
-            <footer className={`footer ${ withInfiniteScroll ? 'fixed bottom-0 left-0 right-0' : '' } ${showFooter || !withInfiniteScroll ? 'translate-y-0' : 'translate-y-full'}`}>
+            <footer className={getFooterClassName(withInfiniteScroll, showFooter)}>
                 <div className="container mx-auto px-4 pt-8 pb-24">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         <div>
@@ -66,7 +74,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            <div className={`footer-actions ${showFooterActions && withInfiniteScroll ? 'translate-y-0' : 'translate-y-full'}`}>
+            <div className={getFooterActionsClassName(showFooterActions, withInfiniteScroll)}>
                 <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                     <Button
                         variant={'link'}

@@ -5,9 +5,10 @@ import {Button} from "@ui/button.tsx";
 
 const Header = () => {
     return (
-        <header className="bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 border-b border-zinc-200 dark:border-zinc-700">
-            <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between h-16">
+        <header className="header">
+            <div className="container mx-auto flex flex-row justify-between">
+                <div className='w-72 h-16 hidden lg:block'></div>
+                <div className="flex flex-row items-center justify-between h-16 w-full px-4">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold">
                         OfferLY
@@ -24,7 +25,7 @@ const Header = () => {
                     </nav>
 
                     {/* Right side icons */}
-                    <div className="flex items-center">
+                    <div className="flex flex-row items-center">
                         <Button variant='link' size='icon' aria-label="Search">
                             <Search/>
                         </Button>
@@ -34,6 +35,7 @@ const Header = () => {
                         <ModeToggle />
                     </div>
                 </div>
+                <div className='w-80 h-16 hidden lg:block'></div>
             </div>
         </header>
     );

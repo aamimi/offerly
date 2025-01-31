@@ -21,7 +21,7 @@ interface ProductListCardProps {
 const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
     return (
         <article
-            className="card p-6"
+            className="card lg:p-6"
             aria-labelledby={`product-title-${product.id}`}>
             <div className="flex">
                 <img
