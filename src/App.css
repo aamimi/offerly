@@ -62,6 +62,6 @@
     }
 
     .main-nav {
-        @apply base-card fixed top-0 left-0 h-screen w-96 p-6 transition-transform transform duration-500 delay-100 z-50;
+        @apply bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-300 border-r border-color fixed top-0 left-0 h-screen w-96 transition-transform transform duration-500 delay-100 z-50;
     }
 }

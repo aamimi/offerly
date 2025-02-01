@@ -15,11 +15,7 @@ export function ModeToggle() {
             size="icon"
             onClick={toggleTheme}
             aria-label="Toggle Theme">
-            {theme === "light" ? (
-                <Moon className="h-[1.2rem] w-[1.2rem]" />
-            ) : (
-                <Sun className="h-[1.2rem] w-[1.2rem]" />
-            )}
+            {theme === "light" ? (<Moon/>) : (<Sun/>)}
             <span className="sr-only">Toggle theme</span>
         </Button>
     )
