@@ -60,4 +60,8 @@
     .action-card {
         @apply base-card rounded-sm cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-900;
     }
+
+    .main-nav {
+        @apply base-card fixed top-0 left-0 h-screen w-96 p-6 transition-transform transform duration-500 delay-100 z-50;
+    }
 }
