@@ -4,10 +4,12 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductListCard from "@components/Product/ProductListCard.tsx";
 import {Helmet} from 'react-helmet';
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
+import {useParams} from "react-router-dom";
 
 const PRODUCTS_PER_PAGE = 10;
 
 const Products = () => {
+    const {category} = useParams();
     const {
         data,
         fetchNextPage,
@@ -15,8 +17,8 @@ const Products = () => {
         status,
         error
     } = useInfiniteQuery({
-        queryKey: ['products'],
-        queryFn: ({pageParam = 0}) => fetchProducts(PRODUCTS_PER_PAGE, pageParam * PRODUCTS_PER_PAGE),
+        queryKey: ['products', category],
+        queryFn: ({pageParam = 0}) => fetchProducts(PRODUCTS_PER_PAGE, pageParam * PRODUCTS_PER_PAGE, category),
         getNextPageParam: (lastPage, allPages) => {
             if (lastPage.products.length < PRODUCTS_PER_PAGE) return undefined;
             return allPages.length;

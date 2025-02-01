@@ -9,7 +9,7 @@ interface SubCategoryProps {
 const SubCategory: React.FC<SubCategoryProps> = ({ subCategory }) => {
     return (
         <Link
-            to={`/products?categories[]=${subCategory.slug}`}
+            to={`/group/${subCategory.slug}`}
             key={subCategory.id}>
             <div className="action-card flex flex-row items-center gap-3 p-2">
                 <img
