@@ -14,7 +14,7 @@ const ProductDetails = () => {
 
     const {data: product, isLoading, isError, error} = useQuery({
         queryKey: ['product', id],
-        queryFn: () => fetchProductById(id || ''),
+        queryFn: () => fetchProductById(id ?? ''),
     });
 
     if (isLoading) return <LoadingSpinner/>;

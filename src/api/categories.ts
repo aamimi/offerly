@@ -1,12 +1,11 @@
 import api from './axios';
-import axios from "axios";
 
 export const fetchCategories = async () => {
-    const response = await axios.get(`http://localhost:3001/categories`);
+    const response = await api.get(`/categories`);
     return response.data;
 };
 
-export const fetchSubcategories = async (id: string) => {
-    const response = await api.get(`/categories/${id}/subcategories`);
+export const fetchCategoriesBySlug = async (slug: string) => {
+    const response = await api.get(`/categories/${slug}`);
     return response.data;
 };

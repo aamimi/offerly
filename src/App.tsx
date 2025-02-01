@@ -5,6 +5,7 @@ import CreateReview from "./pages/CreateReview";
 import ProductDetails from "./pages/ProductDetails";
 import Categories from "@/pages/Categories";
 import './App.css'
+import CategoryDetails from "@/pages/CategoryDetails.tsx";
 
 
 
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/products/:id" element={<ProductDetails />} />
                     <Route path="/products/:id/create-review" element={<CreateReview />} />
                     <Route path="/categories" element={<Categories />} />
+                    <Route path="/categories/:slug" element={<CategoryDetails />} />
                 </Route>
             </Routes>
         </BrowserRouter>
