@@ -3,6 +3,7 @@ import {fetchProducts} from '@api/products';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductListCard from "@components/Product/ProductListCard.tsx";
 import {Helmet} from 'react-helmet';
+import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 const PRODUCTS_PER_PAGE = 10;
 
@@ -22,11 +23,8 @@ const Products = () => {
         },
         initialPageParam: 0
     });
-
-    if (status === 'pending')
-        return <div className="container mx-auto py-4" aria-live="polite">Loading...</div>;
-    if (status === 'error')
-        return <div className="container mx-auto py-4" aria-live="polite">Error: {error.message}</div>;
+    if (status === 'pending') return <LoadingSpinner/>;
+    if (status === 'error') return <ErrorMessage error={error.message}/>;
 
     const products = data?.pages.flatMap(page => page.products) ?? [];
 

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import RatingStars from "@ui/elements/RatingStars.tsx";
 import { fetchProductReviews } from '@api/reviews';
 import Pagination from '@ui/elements/Pagination';
 import ExpandedText from '@ui/elements/ExpandedText';
-import {toLocaleDateString} from "@lib/dateUtils.ts";
+import { toLocaleDateString } from "@lib/dateUtils.ts";
+import {EmptyData, ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 interface Review {
     id: string;
@@ -19,27 +21,13 @@ interface ProductReviewsProps {
 }
 
 const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
-    const [reviews, setReviews] = useState<Review[]>([]);
     const [page, setPage] = useState<number>(1);
-    const [totalPages, setTotalPages] = useState<number>(1);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set());
 
-    useEffect(() => {
-        const loadReviews = async () => {
-            setIsLoading(true);
-            try {
-                const data = await fetchProductReviews(productId, page, 5);
-                setReviews(data.reviews);
-                setTotalPages(data.totalPages);
-            } catch (error) {
-                console.error('Failed to fetch reviews:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        loadReviews().catch(error => console.error('Failed to load reviews:', error));
-    }, [productId, page]);
+    const {data, isLoading, isError, error} = useQuery({
+        queryKey: ['productReviews', productId, page],
+        queryFn: () => fetchProductReviews(productId, page, 5),
+    });
 
     const toggleReadMore = (id: string) => {
         setExpandedComments(prev => {
@@ -53,12 +41,13 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
         });
     };
 
-    if (isLoading) return <div className="py-4" aria-live="polite">Loading...</div>;
-    if (reviews.length === 0) return <div className="py-4" aria-live="polite">No reviews available.</div>;
+    if (isLoading) return <LoadingSpinner/>;
+    if (isError) return <ErrorMessage error={error.message}/>;
+    if (data.reviews.length === 0) return <EmptyData message="No reviews available."/>;
 
     return (
         <div className="space-y-4">
-            {reviews.map((review) => (
+            {data.reviews.map((review: Review) => (
                 <div key={review.id} className="card lg:p-6 rounded-sm">
                     <div className="flex justify-between items-center mb-2">
                         <div>
@@ -67,7 +56,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
                         </div>
                         <span className="text-sm">{toLocaleDateString(review.date)}</span>
                     </div>
-                    <RatingStars rating={review.rating} />
+                    <RatingStars rating={review.rating}/>
                     <p className="mt-2">
                         <ExpandedText
                             text={review.comment}
@@ -79,7 +68,7 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
             ))}
             <Pagination
                 currentPage={page}
-                totalPages={totalPages}
+                totalPages={data.totalPages}
                 onPageChange={setPage}
             />
         </div>

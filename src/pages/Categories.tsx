@@ -3,6 +3,7 @@ import { fetchCategories } from '@api/categories';
 import { Helmet } from 'react-helmet';
 import Category from '@components/category/Category';
 import SubCategoryType from '@components/category/SubCategoryType';
+import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 interface Category {
     id: string;
@@ -17,8 +18,8 @@ const Categories = () => {
         queryFn: () => fetchCategories(),
     });
 
-    if (isLoading) return <div className="container mx-auto py-4" aria-live="polite">Loading...</div>;
-    if (isError) return <div className="container mx-auto py-4" aria-live="polite">Error: {error.message}</div>;
+    if (isLoading) return <LoadingSpinner/>;
+    if (isError) return <ErrorMessage error={error.message}/>;
 
     return (
         <>

@@ -7,6 +7,7 @@ import RatingStars from "@ui/elements/RatingStars.tsx";
 import ProductReviews from "@components/Product/ProductReviews.tsx";
 import {Button} from "@ui/button.tsx";
 import {Helmet} from "react-helmet";
+import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 const ProductDetails = () => {
     const {id} = useParams();
@@ -16,8 +17,8 @@ const ProductDetails = () => {
         queryFn: () => fetchProductById(id || ''),
     });
 
-    if (isLoading) return <div className="container mx-auto py-4" aria-live="polite">Loading...</div>;
-    if (isError) return <div className="container mx-auto py-4" aria-live="polite">Error: {error.message}</div>;
+    if (isLoading) return <LoadingSpinner/>;
+    if (isError) return <ErrorMessage error={error.message}/>;
 
     // Ensure images have src and alt properties
     const images = product.images.map((image: string, index: number) => ({
