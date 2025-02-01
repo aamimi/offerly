@@ -1,16 +1,16 @@
 import React from 'react';
 import {useQuery} from '@tanstack/react-query';
-import {fetchProductById} from '@api/products';
+import {fetchProductBySlug} from '@api/products';
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 interface ReviewProductProps {
-    productId: string;
+    slug: string;
 }
 
-const ReviewProduct: React.FC<ReviewProductProps> = ({productId}: ReviewProductProps) => {
+const ReviewProduct: React.FC<ReviewProductProps> = ({slug}: ReviewProductProps) => {
     const {data: product, isLoading, isError, error} = useQuery({
-        queryKey: ['product', productId],
-        queryFn: () => fetchProductById(productId),
+        queryKey: ['product', slug],
+        queryFn: () => fetchProductBySlug(slug),
     });
 
     if (isLoading) return <LoadingSpinner/>;

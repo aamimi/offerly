@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {Link, useParams} from 'react-router-dom';
-import {fetchProductById} from '@api/products';
+import {fetchProductBySlug} from '@api/products';
 import {ArrowLeftCircle, Star} from 'lucide-react';
 import ProductImageGallery from "@components/Product/ProductImageGallery.tsx";
 import RatingStars from "@ui/elements/RatingStars.tsx";
@@ -10,11 +10,11 @@ import {Helmet} from "react-helmet";
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 
 const ProductDetails = () => {
-    const {id} = useParams();
+    const {slug} = useParams();
 
     const {data: product, isLoading, isError, error} = useQuery({
-        queryKey: ['product', id],
-        queryFn: () => fetchProductById(id ?? ''),
+        queryKey: ['product', slug],
+        queryFn: () => fetchProductBySlug(slug ?? ''),
     });
 
     if (isLoading) return <LoadingSpinner/>;

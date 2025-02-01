@@ -5,7 +5,7 @@ export const fetchProducts = async (limit: number, skip: number) => {
     return response.data;
 };
 
-export const fetchProductById = async (id: string) => {
-    const response = await api.get(`/products/${id}`);
+export const fetchProductBySlug = async (slug: string) => {
+    const response = await api.get(`/products/${slug}`);
     return response.data;
 };

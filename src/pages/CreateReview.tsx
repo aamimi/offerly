@@ -20,14 +20,12 @@ type FormValues = {
 
 const CreateReview = () => {
     const [serverError, setServerError] = useState<string>('');
-    const {id} = useParams();
+    const {slug} = useParams();
     const navigate = useNavigate();
 
     const mutation = useMutation({
-        mutationFn: (newReview: FormValues) => createProductReview(id || '', newReview),
-        onSuccess: () => {
-            navigate(`/products/${id}`);
-        },
+        mutationFn: (newReview: FormValues) => createProductReview(slug || '', newReview),
+        onSuccess: () => navigate(`/products/${slug}`),
         onError: (error) => {
             console.error(error);
             setServerError("Server side error, please try again later.");
@@ -65,7 +63,7 @@ const CreateReview = () => {
             <div className="container mx-auto">
                 <div className="card">
                     <h1 className="mb-4">Create Review</h1>
-                    {id && <ReviewProduct productId={id}/>}
+                    {slug && <ReviewProduct slug={slug}/>}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="border-b pb-12 mb-4">
                             <div className="mb-4">
@@ -97,7 +95,7 @@ const CreateReview = () => {
                         <div className="mt-6 flex items-center justify-end gap-x-4">
                             <Button asChild variant="link">
                                 <Link
-                                    to={`/products/${id}`}
+                                    to={`/products/${slug}`}
                                     aria-label="Cancel creation of a review">
                                     Cancel
                                 </Link>
