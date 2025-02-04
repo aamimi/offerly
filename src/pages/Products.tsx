@@ -1,7 +1,7 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {fetchProducts} from '@api/products';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import ProductListCard from "@components/Product/ProductListCard.tsx";
+import ProductListCard from "@components/product/ProductListCard.tsx";
 import {Helmet} from 'react-helmet';
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
 import {useParams} from "react-router-dom";

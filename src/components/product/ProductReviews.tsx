@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import RatingStars from "@ui/elements/RatingStars.tsx";
 import { fetchProductReviews } from '@api/reviews';
 import Pagination from '@ui/elements/Pagination';
-import ExpandedText from '@ui/elements/ExpandedText';
-import { toLocaleDateString } from "@lib/dateUtils.ts";
 import {EmptyData, ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
+import ReviewCard from "@components/product/ReviewCard.tsx";
 
 interface Review {
     id: string;
@@ -48,23 +46,12 @@ const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
     return (
         <div className="space-y-4">
             {data.reviews.map((review: Review) => (
-                <div key={review.id} className="card lg:p-6 rounded-sm">
-                    <div className="flex justify-between items-center mb-2">
-                        <div>
-                            <h3 className="font-semibold">{review.reviewerName}</h3>
-                            <span className="text-sm text-gray-500">{review.reviewerEmail}</span>
-                        </div>
-                        <span className="text-sm">{toLocaleDateString(review.date)}</span>
-                    </div>
-                    <RatingStars rating={review.rating}/>
-                    <p className="mt-2">
-                        <ExpandedText
-                            text={review.comment}
-                            isExpanded={expandedComments.has(review.id)}
-                            toggleExpand={() => toggleReadMore(review.id)}
-                        />
-                    </p>
-                </div>
+                <ReviewCard
+                    key={review.id}
+                    review={review}
+                    isExpanded={expandedComments.has(review.id)}
+                    toggleExpand={() => toggleReadMore(review.id)}
+                />
             ))}
             <Pagination
                 currentPage={page}

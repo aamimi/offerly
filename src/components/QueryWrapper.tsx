@@ -29,13 +29,12 @@ interface EmptyDataProps {
     message?: string;
 }
 
-export const EmptyData: React.FC<EmptyDataProps> =
-    ({message = "No data available."}) => {
-        return (
-            <Alert className="my-4">
-                <AlertDescription>
-                    {message}
-                </AlertDescription>
-            </Alert>
-        );
-    };
+export const EmptyData: React.FC<EmptyDataProps> = ({message = "No data available."}) => {
+    return (
+        <Alert className="my-4">
+            <AlertDescription>
+                {message}
+            </AlertDescription>
+        </Alert>
+    );
+};

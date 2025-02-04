@@ -15,9 +15,9 @@ const getFooterActionsClassName = (showFooterActions: boolean, withInfiniteScrol
 };
 
 const Footer = () => {
-    const [showFooterActions, setShowFooterActions] = useState(false);
-    const [showFooter, setShowFooter] = useState(false);
-    const [withInfiniteScroll, setWithInfiniteScroll] = useState(true);
+    const [showFooterActions, setShowFooterActions] = useState<boolean>(false);
+    const [showFooter, setShowFooter] = useState<boolean>(false);
+    const [withInfiniteScroll, setWithInfiniteScroll] = useState<boolean>(true);
     const location = useLocation();
 
     const handleScroll = () => {

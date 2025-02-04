@@ -10,7 +10,7 @@ import {Button} from '@ui/button';
 import {Textarea} from '@ui/textarea';
 import {Label} from '@ui/label';
 import {AlertDestructive} from "@ui/elements/AlertDestructive";
-import ReviewProduct from '@components/Product/ReviewProduct';
+import ReviewProduct from '@components/product/ReviewProduct';
 import {Helmet} from "react-helmet";
 
 type FormValues = {
