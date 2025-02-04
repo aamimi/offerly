@@ -20,14 +20,14 @@ const Footer = () => {
     const [withInfiniteScroll, setWithInfiniteScroll] = useState(true);
     const location = useLocation();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowFooterActions(window.scrollY > SCROLL_THRESHOLD);
-            if (window.scrollY <= SCROLL_THRESHOLD) {
-                setShowFooter(false);
-            }
-        };
+    const handleScroll = () => {
+        setShowFooterActions(window.scrollY > SCROLL_THRESHOLD);
+        if (window.scrollY <= SCROLL_THRESHOLD) {
+            setShowFooter(false);
+        }
+    };
 
+    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
