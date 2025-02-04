@@ -4,12 +4,14 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductListCard from "@components/product/ProductListCard.tsx";
 import {Helmet} from 'react-helmet';
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
-import {useParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 
-const PRODUCTS_PER_PAGE = 10;
+const PER_PAGE = 10;
 
 const Products = () => {
     const {category} = useParams();
+    const [searchParams] = useSearchParams();
+    const searchQuery: string | undefined = searchParams.get('search') || undefined;
     const {
         data,
         fetchNextPage,
@@ -17,10 +19,10 @@ const Products = () => {
         status,
         error
     } = useInfiniteQuery({
-        queryKey: ['products', category],
-        queryFn: ({pageParam = 0}) => fetchProducts(PRODUCTS_PER_PAGE, pageParam * PRODUCTS_PER_PAGE, category),
+        queryKey: ['products', category, searchQuery],
+        queryFn: ({pageParam = 0}) => fetchProducts(PER_PAGE, pageParam * PER_PAGE, category, searchQuery),
         getNextPageParam: (lastPage, allPages) => {
-            if (lastPage.products.length < PRODUCTS_PER_PAGE) return undefined;
+            if (lastPage.products.length < PER_PAGE) return undefined;
             return allPages.length;
         },
         initialPageParam: 0
@@ -34,7 +36,7 @@ const Products = () => {
         <>
             <Helmet>
                 <title>Offerly services and products</title>
-                <meta name="description" content="Dynamic description for the page." />
+                <meta name="description" content="Dynamic description for the page."/>
             </Helmet>
             <InfiniteScroll
                 dataLength={products.length}

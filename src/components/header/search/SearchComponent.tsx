@@ -39,7 +39,7 @@ export const SearchComponent: React.FC<SearchComponentProps> = ({onSearchSubmit}
         if (onSearchSubmit) {
             onSearchSubmit(searchQuery);
         } else {
-            navigate(`products?q=${searchQuery}`);
+            navigate(`products?search=${searchQuery}`);
         }
         setIsSearchResultVisible(false);
     };
