@@ -8,10 +8,11 @@ import {Helmet} from "react-helmet";
 
 const CategoryDetails = () => {
     const {slug} = useParams<{ slug: string }>();
-    const {data: category, isLoading, isError, error} = useQuery({
+    const {data: response, isLoading, isError, error} = useQuery({
         queryKey: ['category', slug],
         queryFn: () => fetchCategoriesBySlug(slug ?? ''),
     });
+    const category = response?.data;
 
     if (isLoading) return <LoadingSpinner/>;
     if (isError) return <ErrorMessage error={error.message}/>;
@@ -26,7 +27,7 @@ const CategoryDetails = () => {
                 <div className="card">
                     <h1 className="mb-4">{category.name}</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                        {category.subCategories.map((subCategory: SubCategoryType) => (
+                        {category.subcategories.map((subCategory: SubCategoryType) => (
                             <SubCategory key={subCategory.id} subCategory={subCategory}/>
                         ))}
                     </div>

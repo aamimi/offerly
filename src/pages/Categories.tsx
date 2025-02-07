@@ -9,11 +9,11 @@ interface Category {
     id: string;
     name: string;
     slug: string;
-    subCategories: SubCategoryType[];
+    subcategories: SubCategoryType[];
 }
 
 const Categories = () => {
-    const { data: categories, isLoading, isError, error } = useQuery({
+    const { data: response, isLoading, isError, error } = useQuery({
         queryKey: ['categories'],
         queryFn: () => fetchCategories(),
     });
@@ -28,13 +28,13 @@ const Categories = () => {
                 <meta name="description" content="Browse all categories grouped by parent category." />
             </Helmet>
             <div className="container mx-auto">
-                {categories.map((category: Category) => (
+                {response?.data.map((category: Category) => (
                     <Category
                         key={category.id}
                         id={category.id}
                         name={category.name}
                         slug={category.slug}
-                        subCategories={category.subCategories}
+                        subCategories={category.subcategories}
                     />
                 ))}
             </div>
