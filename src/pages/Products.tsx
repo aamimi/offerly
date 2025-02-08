@@ -22,7 +22,7 @@ const Products = () => {
         queryKey: ['products', category, searchQuery],
         queryFn: ({pageParam = 0}) => fetchProducts(PER_PAGE, pageParam * PER_PAGE, category, searchQuery),
         getNextPageParam: (lastPage, allPages) => {
-            if (lastPage.products.length < PER_PAGE) return undefined;
+            if (lastPage.data.length < PER_PAGE) return undefined;
             return allPages.length;
         },
         initialPageParam: 0
@@ -30,7 +30,7 @@ const Products = () => {
     if (status === 'pending') return <LoadingSpinner/>;
     if (status === 'error') return <ErrorMessage error={error.message}/>;
 
-    const products = data?.pages.flatMap(page => page.products) ?? [];
+    const products = data?.pages.flatMap(page => page.data) ?? [];
 
     return (
         <>
@@ -57,7 +57,7 @@ const Products = () => {
                 <div className="grid grid-cols-1 gap-2">
                     {products.map((product) => (
                         <ProductListCard
-                            key={product.id}
+                            key={product.slug}
                             product={product}
                         />
                     ))}
