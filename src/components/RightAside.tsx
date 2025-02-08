@@ -5,7 +5,7 @@ const RightAside = () => {
           <div className="flex flex-col gap-2 h-60">
               <div id="advertisement-g-first" className="h-full">
                   <img
-                      src="https://placehold.co/380x320"
+                      src="https://picsum.photos/1920/1080?random=1"
                       alt="Advertisement"
                       className="h-full w-full object-cover"
                   />

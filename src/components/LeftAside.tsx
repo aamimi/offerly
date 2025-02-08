@@ -5,7 +5,7 @@ const LeftAside = () => {
           <div className="flex flex-col gap-2" style={{ height: '75vh' }}>
               <div id="advertisement-g-first" className="h-full">
                   <img
-                      src="https://placehold.co/190x800"
+                      src="https://picsum.photos/1920/1080?random=9"
                       alt="Advertisement"
                       className="h-full w-full object-cover"
                   />
