@@ -2,15 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@api/categories';
 import { Helmet } from 'react-helmet';
 import Category from '@components/category/Category';
-import SubCategoryType from '@components/category/SubCategoryType';
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
-
-interface Category {
-    id: string;
-    name: string;
-    slug: string;
-    subcategories: SubCategoryType[];
-}
+import {ICategory} from '@interfaces/Category/CategoryDetails';
 
 const Categories = () => {
     const { data: response, isLoading, isError, error } = useQuery({
@@ -28,12 +21,11 @@ const Categories = () => {
                 <meta name="description" content="Browse all categories grouped by parent category." />
             </Helmet>
             <div className="container mx-auto">
-                {response?.data.map((category: Category) => (
+                {response?.data.map((category: ICategory) => (
                     <Category
-                        key={category.id}
-                        id={category.id}
-                        name={category.name}
+                        key={category.slug}
                         slug={category.slug}
+                        name={category.name}
                         subCategories={category.subcategories}
                     />
                 ))}

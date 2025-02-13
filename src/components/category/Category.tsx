@@ -1,22 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SubCategory from './SubCategory';
-import SubCategoryType from "./SubCategoryType";
+import {ISubCategory} from "@interfaces/Category/SubCategory.ts";
 
 interface CategoryProps {
-    id: string;
-    name: string;
     slug: string;
-    subCategories: SubCategoryType[];
+    name: string;
+    subCategories: ISubCategory[];
 }
 
-const Category: React.FC<CategoryProps> = ({ id, name, slug, subCategories }) => {
+const Category: React.FC<CategoryProps> = ({ slug, name, subCategories }) => {
     return (
-        <div key={id} className="card mb-4">
+        <div className="card mb-4">
             <h2 className="text-xl font-bold mb-4">{name}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                {subCategories.map((subCategory: SubCategoryType) => (
-                    <SubCategory key={subCategory.id} subCategory={subCategory} />
+                {subCategories.map((subCategory: ISubCategory) => (
+                    <SubCategory key={subCategory.slug} subCategory={subCategory} />
                 ))}
                 <Link
                     to={`/categories/${slug}`}

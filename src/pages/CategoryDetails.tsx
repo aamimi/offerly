@@ -1,18 +1,12 @@
-import {fetchCategoriesBySlug} from "@api/categories";
 import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
-import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper";
-import SubCategoryType from "@components/category/SubCategoryType";
-import SubCategory from "@components/category/SubCategory";
 import {Helmet} from "react-helmet";
-
-interface ICategory {
-    slug: string;
-    name: string;
-    meta_title: string;
-    meta_description: string | null | undefined;
-    subcategories: SubCategoryType[];
-}
+import {fetchCategoriesBySlug} from "@api/categories";
+import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper";
+import SubCategory from "@components/category/SubCategory";
+import {IMetatags} from '@interfaces/Metatags';
+import {ICategory} from '@interfaces/Category/CategoryDetails';
+import {ISubCategory} from "@interfaces/Category/SubCategory.ts";
 
 const CategoryDetails = () => {
     const {slug} = useParams<{ slug: string }>();
@@ -22,6 +16,7 @@ const CategoryDetails = () => {
     });
 
     const category: ICategory = response?.data;
+    const metaTags: IMetatags = response?.meta;
 
     if (isLoading) return <LoadingSpinner/>;
     if (isError) return <ErrorMessage error={error.message}/>;
@@ -29,15 +24,15 @@ const CategoryDetails = () => {
     return (
         <>
             <Helmet>
-                <title>Categories - {category.meta_title}</title>
-                <meta name="description" content={category.meta_description ?? ''}/>
+                <title>Categories - {metaTags.title}</title>
+                <meta name="description" content={metaTags.description ?? ''}/>
             </Helmet>
             <div className="container mx-auto">
                 <div className="card">
                     <h1 className="mb-4">{category.name}</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-                        {category.subcategories.map((subCategory: SubCategoryType) => (
-                            <SubCategory key={subCategory.id} subCategory={subCategory}/>
+                        {category.subcategories.map((subCategory: ISubCategory) => (
+                            <SubCategory key={subCategory.slug} subCategory={subCategory}/>
                         ))}
                     </div>
                 </div>

@@ -1,14 +1,10 @@
 import {useState} from 'react';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {Button} from "@ui/button.tsx";
-
-interface Image {
-    src: string;
-    alt: string;
-}
+import {IImage} from "@interfaces/Product/Image.ts";
 
 interface ProductImageGalleryProps {
-    images: Image[];
+    images: IImage[];
 }
 
 const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
@@ -42,8 +38,8 @@ const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
                     {images.map((img, index) => (
                         <button key={index} onClick={() => handleThumbnailClick(index)}>
                             <img
-                                src={img.src}
-                                alt={img.alt}
+                                src={img.url}
+                                alt={img.name}
                                 className={`w-16 h-16 object-cover cursor-pointer border-2 ${
                                     index === currentImageIndex
                                         ? 'border-zinc-400'
@@ -58,8 +54,8 @@ const ProductImageGallery = ({images}: ProductImageGalleryProps) => {
             {/* Main Image */}
             <div className="relative flex-1">
                 <img
-                    src={images[currentImageIndex].src}
-                    alt={images[currentImageIndex].alt}
+                    src={images[currentImageIndex].url}
+                    alt={images[currentImageIndex].name}
                     className="w-80 h-80 object-contain mx-auto"
                 />
 

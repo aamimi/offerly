@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SubCategoryType from "./SubCategoryType";
+import {ISubCategory} from "@interfaces/Category/SubCategory.ts";
 
 interface SubCategoryProps {
-    subCategory: SubCategoryType;
+    subCategory: ISubCategory;
 }
 
 const SubCategory: React.FC<SubCategoryProps> = ({ subCategory }) => {
     return (
         <Link
             to={`/group/${subCategory.slug}`}
-            key={subCategory.id}>
+            key={subCategory.slug}>
             <div className="action-card flex flex-row items-center gap-3 p-2">
                 <img
                     src={subCategory.image}

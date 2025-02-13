@@ -38,31 +38,33 @@ const Products = () => {
                 <title>Offerly services and products</title>
                 <meta name="description" content="Dynamic description for the page."/>
             </Helmet>
-            <InfiniteScroll
-                dataLength={products.length}
-                next={fetchNextPage}
-                hasMore={hasNextPage ?? false}
-                loader={
-                    <div className="text-center py-4" aria-live="polite">
-                        Loading more products...
+            <div className="container mx-auto">
+                <InfiniteScroll
+                    dataLength={products.length}
+                    next={fetchNextPage}
+                    hasMore={hasNextPage ?? false}
+                    loader={
+                        <div className="text-center py-4" aria-live="polite">
+                            Loading more products...
+                        </div>
+                    }
+                    endMessage={
+                        <div className="text-center py-4 text-gray-500" aria-live="polite">
+                            No more products to load.
+                        </div>
+                    }
+                    scrollThreshold="90%"
+                >
+                    <div className="grid grid-cols-1 gap-2">
+                        {products.map((product) => (
+                            <ProductListCard
+                                key={product.slug}
+                                product={product}
+                            />
+                        ))}
                     </div>
-                }
-                endMessage={
-                    <div className="text-center py-4 text-gray-500" aria-live="polite">
-                        No more products to load.
-                    </div>
-                }
-                scrollThreshold="90%"
-            >
-                <div className="grid grid-cols-1 gap-2">
-                    {products.map((product) => (
-                        <ProductListCard
-                            key={product.slug}
-                            product={product}
-                        />
-                    ))}
-                </div>
-            </InfiniteScroll>
+                </InfiniteScroll>
+            </div>
         </>
     );
 };

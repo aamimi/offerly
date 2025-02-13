@@ -1,36 +1,34 @@
-import {useQuery} from '@tanstack/react-query';
 import {Link, useParams} from 'react-router-dom';
-import {fetchProductBySlug} from '@api/products';
-import {ArrowLeftCircle, Star} from 'lucide-react';
-import ProductImageGallery from "@components/product/ProductImageGallery.tsx";
-import RatingStars from "@ui/elements/RatingStars.tsx";
-import ProductReviews from "@components/product/ProductReviews.tsx";
-import {Button} from "@ui/button.tsx";
+import {useQuery} from '@tanstack/react-query';
 import {Helmet} from "react-helmet";
+import {ArrowLeftCircle} from 'lucide-react';
+import {Button} from "@ui/button.tsx";
+import {fetchProductBySlug} from '@api/products';
+import ProductImageGallery from "@components/product/ProductImageGallery.tsx";
 import {ErrorMessage, LoadingSpinner} from "@components/QueryWrapper.tsx";
+import {IMetatags} from "@interfaces/Metatags.ts";
+import {IProduct} from "@interfaces/Product/ProductDetails.ts";
+import ProductPrice from "@components/product/ProductPrice.tsx";
 
 const ProductDetails = () => {
     const {slug} = useParams();
 
-    const {data: product, isLoading, isError, error} = useQuery({
+    const {data: response, isLoading, isError, error} = useQuery({
         queryKey: ['product', slug],
         queryFn: () => fetchProductBySlug(slug ?? ''),
     });
 
+    const product: IProduct = response?.data;
+    const metatags: IMetatags = response?.meta;
+
     if (isLoading) return <LoadingSpinner/>;
     if (isError) return <ErrorMessage error={error.message}/>;
-
-    // Ensure images have src and alt properties
-    const images = product.images.map((image: string, index: number) => ({
-        src: image,
-        alt: `Product image ${index + 1}`
-    }));
 
     return (
         <>
             <Helmet>
-                <title>Product</title>
-                <meta name="description" content={product.description} />
+                <title>{metatags.title}</title>
+                <meta name="description" content={metatags.description}/>
             </Helmet>
             <div className="container mx-auto">
                 <Button asChild variant="link">
@@ -42,57 +40,53 @@ const ProductDetails = () => {
 
                 <div className="card mb-4">
                     <div className="xl:flex">
-                        <div className="md:flex-shrink-0 mb-4 lg:mb-0">
-                            <ProductImageGallery images={images}/>
+                        <div className="md:flex-shrink-0 mr-4 mb-4 lg:mb-0">
+                            <ProductImageGallery images={product.images}/>
                         </div>
                         <div>
+                            <div className="mb-4">
+                                {product.rating}
+                            </div>
                             <h1 className="mb-2">{product.title}</h1>
-                            <div className="mb-4">
-                            <span className="text-2xl font-semibold">
-                                ${product.price}
-                            </span>
-                            </div>
-                            <div className="mb-4">
-                                <RatingStars rating={product.rating}/>
-                            </div>
+                            {product.summary && (
+                                <div className="mb-4">
+                                    {product.summary}
+                                </div>
+                            )}
+                            {product.price || product.discount_price && (
+                                <div className="mb-4">
+                                    <ProductPrice price={product.price} discountPrice={product.discount_price}/>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className="card mb-4">
-                    <div className="pb-4 border-b-2">
-                        <h2 className="mb-2">About</h2>
-                        <p className="mb-2">{product.description}</p>
-                        <h3 className="mb-2">A cumuler avec ce deal</h3>
-                        <ul>
-                            <li>10% de réduction sur les accessoires</li>
-                            <li>20% de réduction sur les coques</li>
-                        </ul>
+                {(product.description || product.conditions || product.instructions) && (
+                    <div className="card mb-4">
+                        {product.description && (
+                            <div className="py-4">
+                                <h2 className="mb-2">About</h2>
+                                {product.description}
+                            </div>
+                        )}
+                        {product.conditions && (
+                            <div className="py-4 border-t-2">
+                                <h2 className="mb-2">Conditions</h2>
+                                {product.conditions}
+                            </div>
+                        )}
+                        {product.instructions && (
+                            <div className="py-4 border-t-2">
+                                <h2 className="mb-2">Instructions</h2>
+                                {product.instructions}
+                            </div>
+                        )}
                     </div>
-                    <div className="py-4 border-b-2">
-                        <h2 className="mb-2">Conditions</h2>
-                        <ul>
-                            <li>Valable jusqu'au 31/12/2021</li>
-                            <li>Valable pour les nouveaux clients</li>
-                        </ul>
-                    </div>
-                    <div className="py-4">
-                        <p>Il suffit de vous rendre sur le site de notre partenaire et d'entrer le code promo suivant
-                            : <strong>DEAL10</strong></p>
-                    </div>
-                </div>
+                )}
                 <div className="card">
                     <div className="flex items-center justify-between mb-4">
-                        <h2>Customer Reviews</h2>
-                        <Button asChild>
-                            <Link
-                                to={`/products/${product.id}/create-review`}
-                                aria-label="Write a Review">
-                                <Star/>
-                                Write a Review
-                            </Link>
-                        </Button>
+                        <h2>Customer Comments</h2>
                     </div>
-                    <ProductReviews productId={product.id}/>
                 </div>
             </div>
         </>
