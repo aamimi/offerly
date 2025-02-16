@@ -7,3 +7,8 @@ export const fetchProductComments = async (slug: string, page: number = 1, perPa
     console.log(response);
     return response.data;
 };
+
+export const createComment = async (slug: string, content: string) => {
+    const response = await api.post(`/products/${slug}/comments`, { content });
+    return response.data;
+};

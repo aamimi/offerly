@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {CircleChevronRight} from 'lucide-react';
 import {Button} from "@ui/button.tsx";
 import {IProduct} from "@interfaces/Product/ProductList.ts";
-import ProductPrice from "@components/product/ProductPrice.tsx";
-import ProductRating from "@components/product/ProductRating.tsx";
+import ProductPrice from "@components/product/header/ProductPrice.tsx";
+import ProductRating from "@components/product/header/ProductRating.tsx";
 
 interface ProductListCardProps {
     product: IProduct;

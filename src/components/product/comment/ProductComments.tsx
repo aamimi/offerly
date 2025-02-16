@@ -6,6 +6,7 @@ import {IProductComment, IProductCommentsResponse} from '@interfaces/Product/Pro
 import React from "react";
 import {fetchProductComments} from '@api/comments';
 import {ChevronLeft, ChevronRight} from "lucide-react";
+import CommentForm from "@components/product/comment/CommentForm.tsx";
 
 interface ProductCommentsProps {
     slug: string;
@@ -29,6 +30,9 @@ const ProductComments = ({slug, total}: ProductCommentsProps) => {
     return (
         <div className="card">
             <h2 className="mb-4">Comments</h2>
+            <div className="border-b border-color mb-8">
+                <CommentForm slug={slug}/>
+            </div>
             <div className="space-y-8">
                 {comments.map((comment: IProductComment) => (
                     <div key={comment.uuid} className="border-b pb-4 border-color">
