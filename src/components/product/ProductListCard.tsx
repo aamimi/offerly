@@ -4,6 +4,7 @@ import {CircleChevronRight} from 'lucide-react';
 import {Button} from "@ui/button.tsx";
 import {IProduct} from "@interfaces/Product/ProductList.ts";
 import ProductPrice from "@components/product/ProductPrice.tsx";
+import ProductRating from "@components/product/ProductRating.tsx";
 
 interface ProductListCardProps {
     product: IProduct;
@@ -21,8 +22,8 @@ const ProductListCard: React.FC<ProductListCardProps> = ({product}) => {
                     alt={product.title}
                 />
                 <div className="flex flex-col justify-between sm:w-full">
-                        <div className="mb-2">
-                            {product.rating}
+                        <div className="mb-2 w-fit">
+                            <ProductRating rating={product.rating} />
                         </div>
                         <h2 id={`product-title-${product.slug}`} className="mb-2">
                             <Link

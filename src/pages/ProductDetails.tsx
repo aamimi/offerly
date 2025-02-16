@@ -1,7 +1,7 @@
 import {Link, useParams} from 'react-router-dom';
 import {useQuery} from '@tanstack/react-query';
 import {Helmet} from "react-helmet";
-import {ArrowBigDown, ArrowBigUp, ArrowLeftCircle, MessagesSquare, Share2} from 'lucide-react';
+import {ArrowLeftCircle, MessagesSquare, Share2} from 'lucide-react';
 import {Button} from "@ui/button.tsx";
 import {fetchProductBySlug} from '@api/products';
 import ProductImageGallery from "@components/product/ProductImageGallery.tsx";
@@ -11,6 +11,7 @@ import {IProduct} from "@interfaces/Product/ProductDetails.ts";
 import ProductPrice from "@components/product/ProductPrice.tsx";
 import ProductComments from "@components/product/ProductComments.tsx";
 import {formatDistanceToNow} from "date-fns";
+import ProductRating from "@components/product/ProductRating.tsx";
 
 const ProductDetails = () => {
     const {slug} = useParams();
@@ -47,17 +48,7 @@ const ProductDetails = () => {
                         </div>
                         <div className='xl:pt-0 pt-4 flex-1'>
                             <div className="flex justify-between items-center mb-4 font-semibold">
-                                <div className="flex flex-row items-center p-1 border border-color text-lg">
-                                    <button
-                                        className="w-8 h-8 lg:w-10 lg:h-10 bg-zinc-200 dark:bg-zinc-900 rounded-sm cursor-pointer">
-                                        <ArrowBigDown className="w-5 h-8 lg:w-7 lg:h-10 mx-auto text-blue-500"/>
-                                    </button>
-                                    <span className="mx-2">{product.rating}°</span>
-                                    <button
-                                        className="w-8 h-8 lg:w-10 lg:h-10 bg-zinc-200 dark:bg-zinc-900 rounded-sm cursor-pointer">
-                                        <ArrowBigUp className="w-5 h-8 lg:w-7 lg:h-10 mx-auto text-red-500"/>
-                                    </button>
-                                </div>
+                                <ProductRating rating={product.rating} />
                                 <div className="flex gap-4">
                                     <button className="flex items-center gap-1" title="Share">
                                         <Share2/>
