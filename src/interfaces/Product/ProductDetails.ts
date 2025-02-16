@@ -10,5 +10,7 @@ export interface IProduct {
     price: number;
     discount_price: number;
     rating: number;
+    created_at: string;
+    comments_count: number;
     images: IImage[];
 }

@@ -69,7 +69,7 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                    <div className="mt-8 pt-8 border-t border-color text-center text-gray-400">
                         <p>© 2024 OfferLY. All rights reserved.</p>
                     </div>
                 </div>

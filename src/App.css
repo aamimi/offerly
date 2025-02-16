@@ -30,7 +30,7 @@
     }
 
     .bg-color {
-        @apply bg-zinc-100 dark:bg-zinc-800;
+        @apply bg-zinc-50 dark:bg-zinc-800;
     }
 
     .text-color {
