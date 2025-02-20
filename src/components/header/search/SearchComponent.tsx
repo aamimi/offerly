@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
-import {useNavigate} from 'react-router-dom';
+import {NavigateFunction, useNavigate} from 'react-router-dom';
 import {getSearchResult} from "@api/search";
-import {useDebounce} from '@hooks//useDebounce';
+import {useDebounce} from '@hooks/useDebounce';
 import {SearchInput} from './SearchInput';
 import {SearchResults} from './SearchResults';
 
@@ -10,8 +10,8 @@ interface SearchComponentProps {
     onSearchSubmit?: (query: string) => void;
 }
 
-export const SearchComponent: React.FC<SearchComponentProps> = ({onSearchSubmit}) => {
-    const navigate = useNavigate();
+export const SearchComponent: React.FC<SearchComponentProps> = ({onSearchSubmit}: SearchComponentProps) => {
+    const navigate: NavigateFunction = useNavigate();
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [isSearchResultVisible, setIsSearchResultVisible] = useState<boolean>(false);
     const searchResultRef = useRef<HTMLDivElement>(null);
@@ -19,7 +19,7 @@ export const SearchComponent: React.FC<SearchComponentProps> = ({onSearchSubmit}
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
     const {
-        data: searchResult = {categories: [], products: []},
+        data: searchResult = {data:{categories: [], products: []}},
         isLoading,
         isError
     } = useQuery({
@@ -89,8 +89,8 @@ export const SearchComponent: React.FC<SearchComponentProps> = ({onSearchSubmit}
                     <SearchResults
                         isError={isError}
                         isLoading={isLoading}
-                        categories={searchResult.categories}
-                        products={searchResult.products}
+                        categories={searchResult.data.categories}
+                        products={searchResult.data.products}
                         onClose={() => setIsSearchResultVisible(false)}
                     />
                 </div>

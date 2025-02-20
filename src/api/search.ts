@@ -14,15 +14,17 @@ interface IProduct {
 }
 
 interface ISearchResult {
-    categories: ICategory[];
-    products: IProduct[];
+    data: {
+        categories: ICategory[];
+        products: IProduct[];
+    }
 }
 
-const getSearchResult= async (query: string):Promise<ISearchResult> => {
-    const params = query !== '' ? { query } : {};
+const getSearchResult = async (query: string): Promise<ISearchResult> => {
+    const params = query !== '' ? {query} : {};
     const response = await api.get(`/search`, {params});
     return response.data;
 }
 
 export {getSearchResult};
-export type { IProduct, ICategory, ISearchResult };
+export type {IProduct, ICategory, ISearchResult};

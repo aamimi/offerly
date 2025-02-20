@@ -4,7 +4,6 @@ export const fetchProductComments = async (slug: string, page: number = 1, perPa
     const response = await api.get(`/products/${slug}/comments`, {
         params: { page, perPage }
     });
-    console.log(response);
     return response.data;
 };
 

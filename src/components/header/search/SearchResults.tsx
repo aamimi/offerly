@@ -25,10 +25,10 @@ export const SearchResults: React.FC<SearchResultsProps> = (
         // Handle click on search result item
         switch (type) {
             case 'category':
-                navigate(`/categories/${(item as ICategory).slug}`);
+                navigate(`/group/${(item as ICategory).slug}`);
                 break;
             case 'product':
-                navigate(`/product/${(item as IProduct).slug}`);
+                navigate(`/products/${(item as IProduct).slug}`);
                 break;
         }
         onClose?.();
